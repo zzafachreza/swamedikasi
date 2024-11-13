@@ -6,6 +6,7 @@ import { MyButton, MyGap, MyInput } from '../../components'
 import { api_token, apiURL, getData, MYAPP, storeData } from '../../utils/localStorage'
 import { showMessage } from 'react-native-flash-message'
 import axios from 'axios'
+import MyLoading from '../../components/MyLoading'
 
 export default function Login({navigation}) {
 
@@ -14,6 +15,8 @@ export default function Login({navigation}) {
         username: '',
         password:'',
     });
+
+    const [loading, setLoading] = useState(false)
 
     const handleLogin = () => {
         const requiredFields = [
@@ -34,16 +37,19 @@ export default function Login({navigation}) {
             }
         }
 
-        console.log(kirim)
+        console.log(kirim);
+        setLoading(true);
         axios
         .post(apiURL + 'login', kirim)
         .then(response => {
             if (response.data.status === 200) {
+                setLoading(true);
                 console.log(response.data);
                 Alert.alert(MYAPP, "Login Berhasil!");
                 storeData('user', response.data.data)
                 navigation.replace('MainApp');
             } else if (response.data.status === 404) {
+                setLoading(false)
                 console.log(response.data);
                 showMessage({
                     type: 'default',
@@ -52,6 +58,7 @@ export default function Login({navigation}) {
                     message: "Maaf Username atau Password salah!"
                 })
             } else {
+                setLoading(false);
                 showMessage({
                     type: 'default',
                     color: 'white',
@@ -61,6 +68,7 @@ export default function Login({navigation}) {
             }
         })
         .catch(error => {
+            setLoading(false);
             console.error("Terjadi kesalahan dari server!", error);
             showMessage({
                 type: "default",
@@ -77,6 +85,8 @@ export default function Login({navigation}) {
         flex:1,
         backgroundColor:colors.white
     }}>
+
+    {loading && <MyLoading />}
     
     <ScrollView>
        <View style={{

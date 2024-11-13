@@ -117,61 +117,62 @@ export default function InputSwamedikasi({navigation}) {
 
         <View style={{
         padding:20,
-        marginBottom:10
+        marginBottom:10,
+        
 
     }}>
 
     <View style={{
         padding:10,
-        
+       
     }}>
 
     <View style={{
         flexDirection:'row'
     }}>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:0.9}}>Nama Apotek</Text>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:0.5}}>:</Text>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1}}>{user.namaApotek}</Text>
+    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1}}>Nama Apotek</Text>
+ 
+    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1.7}}>: {user.namaApotek}</Text>
     </View>
 
     <View style={{
         flexDirection:'row'
     }}>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:0.9}}>Alamat Apotek</Text>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:0.5}}>:</Text>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1}}>{user.alamatApotek}</Text>
+    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1}}>Alamat Apotek</Text>
+ 
+    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1.7}}>: {user.alamatApotek}</Text>
     </View>
 
     <View style={{
         flexDirection:'row'
     }}>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:0.9}}>Nama Apoteker</Text>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:0.5}}>:</Text>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1}}>{user.namaLengkap}</Text>
+    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1}}>Nama Apoteker</Text>
+ 
+    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1.7}}>: {user.namaLengkap}</Text>
     </View>
 
     <View style={{
         flexDirection:'row'
     }}>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:0.9}}>No SIPA</Text>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:0.5}}>:</Text>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1}}>{user.nomorSIPA}</Text>
+    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1}}>No SIPA</Text>
+ 
+    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1.7}}>: {user.nomorSIPA}</Text>
     </View>
 
     <View style={{
         flexDirection:'row'
     }}>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:0.9}}>Nomor SIA</Text>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:0.5}}>:</Text>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1}}>{user.nomorSIA}</Text>
+    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1}}>Nomor SIA</Text>
+ 
+    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1.7}}>: {user.nomorSIA}</Text>
     </View>
 
     <View style={{
         flexDirection:'row'
     }}>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:0.9}}>Telepon Apoteker</Text>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:0.5}}>:</Text>
-    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1}}>{user.nomorWA}</Text>
+    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1}}>Telepon Apoteker</Text>
+
+    <Text style={{fontFamily:fonts.primary[600], fontSize:12, flex:1.7}}>: {user.nomorWA}</Text>
     </View>
 
     </View>

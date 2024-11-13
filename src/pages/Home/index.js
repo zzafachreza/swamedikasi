@@ -23,6 +23,7 @@ import { useToast } from 'react-native-toast-notifications';
 import MyLoading from '../../components/MyLoading';
 
 import { Icon } from 'react-native-elements';
+import { Linking } from 'react-native';
 
 
 const MyMenu = ({ onPress, img, label, backgroundColor, desc }) => {
@@ -68,6 +69,13 @@ export default function Home({ navigation, route }) {
       setUser(u)
     })
   }
+
+  const handlePress = () => {
+    // Ganti URL dengan link yang ingin kamu buka
+    Linking.openURL('https://www.alodokter.com/obat-a-z')
+      .catch((err) => console.error('Failed to open URL', err));
+  };
+
 
   useEffect(() => {
     __getUser();
@@ -167,7 +175,7 @@ export default function Home({ navigation, route }) {
         </View>
       </TouchableWithoutFeedback>
 
-      <TouchableWithoutFeedback onPress={() => navigation.navigate('Referensi')}>
+      <TouchableWithoutFeedback onPress={handlePress}>
         <View style={{
           padding:10,
           backgroundColor:colors.white,
