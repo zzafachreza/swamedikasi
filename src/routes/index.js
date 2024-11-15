@@ -64,7 +64,7 @@ import {
   InputSwamedikasi,
   RiwayatPelayanan,
   Referensi,
-
+  Edit
 
 
 } from '../pages';
@@ -99,8 +99,16 @@ export default function Router() {
         }}
       />
 
+      <Stack.Screen
+        name="Edit"
+        component={Edit}
+        options={{
+          headerShown: false,
+        }}
+      />
 
-<Stack.Screen
+
+      <Stack.Screen
         name="Login"
         component={Login}
         options={{
@@ -109,7 +117,7 @@ export default function Router() {
         }}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="Register"
         component={Register}
         options={{
@@ -136,7 +144,7 @@ export default function Router() {
         }}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="RiwayatPelayanan"
         component={RiwayatPelayanan}
         options={{
@@ -145,8 +153,8 @@ export default function Router() {
         }}
       />
 
-      
-<Stack.Screen
+
+      <Stack.Screen
         name="Referensi"
         component={Referensi}
         options={{
@@ -156,7 +164,7 @@ export default function Router() {
       />
 
 
-<Stack.Screen
+      <Stack.Screen
         name="Petunjuk"
         component={Petunjuk}
         options={{

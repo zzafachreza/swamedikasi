@@ -9,6 +9,7 @@ import Register from './Register';
 import InputSwamedikasi from './Menu/input';
 import RiwayatPelayanan from './Menu/riwayat';
 import Referensi from './Menu/referensi';
+import Edit from './Menu/Edit';
 
 
 
@@ -27,7 +28,8 @@ export {
   InputSwamedikasi,
   RiwayatPelayanan,
   Referensi,
+  Edit,
 
-  
+
 
 };

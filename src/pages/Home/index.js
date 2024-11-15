@@ -72,8 +72,9 @@ export default function Home({ navigation, route }) {
 
   const handlePress = () => {
     // Ganti URL dengan link yang ingin kamu buka
-    Linking.openURL('https://www.alodokter.com/obat-a-z')
-      .catch((err) => console.error('Failed to open URL', err));
+    // Linking.openURL('https://www.alodokter.com/obat-a-z')
+    //   .catch((err) => console.error('Failed to open URL', err));
+    navigation.navigate('Referensi')
   };
 
 
@@ -88,112 +89,112 @@ export default function Home({ navigation, route }) {
       height: "100%"
     }}>
 
-    {/* header */}
-    <View style={{
-      padding:10,
-      flexDirection:"row",
-      justifyContent:'space-between',
-      alignItems:"center",
-      marginTop:20,
-  
-    }}>
+      {/* header */}
+      <View style={{
+        padding: 10,
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        alignItems: "center",
+        marginTop: 20,
 
-    <View>
-      <Text style={{
-        fontFamily:fonts.primary[600],
-        fontSize:15,
+      }}>
 
-      }}>Selamat datang, {user.username}</Text>
-      <Text style={{
-        fontFamily:fonts.primary[800],
-        fontSize:13,
-        color:colors.gray
-      }}>{user.namaApotek}</Text>
-    </View>
-
-    <View>
-      <Image style={{
-        width:52,
-        height:52,
-        tintColor:colors.primary
-      }} source={require('../../assets/logologin.png')}/>
-    </View>
-
-    </View>
-
-
-    <View style={{
-      padding:10,
-   
-    }}>
-
-{/* slider */}
-    <View style={{
-      padding:10,
-      alignItems:"center"
-    }}>
-<Image style={{
-  width:337,
-  height:182,
-
-}} source={require('../../assets/slider_1.png')}/>
-    </View>
-
-  {/* menu */}
-    <View style={{
-      padding:10,
-    }}>
- <TouchableWithoutFeedback onPress={() => navigation.navigate('InputSwamedikasi')}>
-        <View style={{
-          padding:10,
-          backgroundColor:colors.white,
-          borderRadius:10,
-          marginTop:20
-
-        }}>
+        <View>
           <Text style={{
-            fontFamily:fonts.primary[600],
-            fontSize:25,
-            textAlign:'center'
-          }}>Input E-Swamedikasi</Text>
-        </View>
-      </TouchableWithoutFeedback>
+            fontFamily: fonts.primary[600],
+            fontSize: 15,
 
-      <TouchableWithoutFeedback onPress={() => navigation.navigate('RiwayatPelayanan')}>
-        <View style={{
-          padding:10,
-          backgroundColor:colors.white,
-          borderRadius:10,
-          marginTop:20
-
-        }}>
+          }}>Selamat datang, {user.username}</Text>
           <Text style={{
-            fontFamily:fonts.primary[600],
-            fontSize:25,
-            textAlign:'center'
-          }}>Riwayat Pelayanan</Text>
+            fontFamily: fonts.primary[800],
+            fontSize: 13,
+            color: colors.gray
+          }}>{user.namaApotek}</Text>
         </View>
-      </TouchableWithoutFeedback>
 
-      <TouchableWithoutFeedback onPress={handlePress}>
+        <View>
+          <Image style={{
+            width: 52,
+            height: 52,
+            tintColor: colors.primary
+          }} source={require('../../assets/logologin.png')} />
+        </View>
+
+      </View>
+
+
+      <View style={{
+        padding: 10,
+
+      }}>
+
+        {/* slider */}
         <View style={{
-          padding:10,
-          backgroundColor:colors.white,
-          borderRadius:10,
-          marginTop:20
-
+          padding: 10,
+          alignItems: "center"
         }}>
-          <Text style={{
-            fontFamily:fonts.primary[600],
-            fontSize:25,
-            textAlign:'center'
-          }}>Referensi</Text>
+          <Image style={{
+            width: 337,
+            height: 182,
+
+          }} source={require('../../assets/slider_1.png')} />
         </View>
-      </TouchableWithoutFeedback>
-    </View>
-     
-    </View>
-    
+
+        {/* menu */}
+        <View style={{
+          padding: 10,
+        }}>
+          <TouchableWithoutFeedback onPress={() => navigation.navigate('InputSwamedikasi', user)}>
+            <View style={{
+              padding: 10,
+              backgroundColor: colors.white,
+              borderRadius: 10,
+              marginTop: 20
+
+            }}>
+              <Text style={{
+                fontFamily: fonts.primary[600],
+                fontSize: 25,
+                textAlign: 'center'
+              }}>Input E-Swamedikasi</Text>
+            </View>
+          </TouchableWithoutFeedback>
+
+          <TouchableWithoutFeedback onPress={() => navigation.navigate('RiwayatPelayanan')}>
+            <View style={{
+              padding: 10,
+              backgroundColor: colors.white,
+              borderRadius: 10,
+              marginTop: 20
+
+            }}>
+              <Text style={{
+                fontFamily: fonts.primary[600],
+                fontSize: 25,
+                textAlign: 'center'
+              }}>Riwayat Pelayanan</Text>
+            </View>
+          </TouchableWithoutFeedback>
+
+          <TouchableWithoutFeedback onPress={handlePress}>
+            <View style={{
+              padding: 10,
+              backgroundColor: colors.white,
+              borderRadius: 10,
+              marginTop: 20
+
+            }}>
+              <Text style={{
+                fontFamily: fonts.primary[600],
+                fontSize: 25,
+                textAlign: 'center'
+              }}>Referensi</Text>
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
+
+      </View>
+
 
     </ImageBackground>
   )

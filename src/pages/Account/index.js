@@ -73,14 +73,14 @@ export default function ({ navigation, route }) {
         return (
             <View
                 style={{
-                    padding:10
+                    padding: 10
                 }}>
                 <Text
                     style={{
-                        fontFamily:fonts.primary[600],
+                        fontFamily: fonts.primary[600],
                         color: colors.black,
-                        marginLeft:10,
-                        marginBottom:10
+                        marginLeft: 10,
+                        marginBottom: 10
                     }}>
                     {label}
                 </Text>
@@ -88,19 +88,19 @@ export default function ({ navigation, route }) {
                     padding: 10,
                     backgroundColor: colors.white,
                     borderRadius: 50,
-                    borderWidth:0.5,
-                    height:40
+                    borderWidth: 0.5,
+                    height: 40
                 }}>
-                <Text
-                    style={{
-                        fontFamily:fonts.primary[700],
-                        color: colors.primary,
-                        paddingLeft:10
-                    }}>
-                    {value}
-                </Text>
+                    <Text
+                        style={{
+                            fontFamily: fonts.primary[700],
+                            color: colors.primary,
+                            paddingLeft: 10
+                        }}>
+                        {value}
+                    </Text>
                 </View>
-                
+
             </View>
         )
     }
@@ -130,16 +130,16 @@ export default function ({ navigation, route }) {
                             justifyContent: 'center',
                             alignItems: 'center'
                         }}>
-                            
+
                         </View>
                         <View style={{ padding: 10, }}>
-                            <MyList label="Nama Lengkap & Gelar" value={user.namaLengkap} />
-                            <MyList label="Nama Apotek" value={user.namaApotek} />
-                            <MyList label="Alamat Apotek" value={user.alamatApotek} />
-                            <MyList label="Link Google Maps Apotek" value={user.linkApotek} />
-                            <MyList label="No SIA" value={user.nomorSIA} />
-                            <MyList label="Nomor SIPA" value={user.nomorSIPA} />
-                            <MyList label="Nomor WhatsApp" value={user.nomorWA} />
+                            <MyList label="Nama Lengkap & Gelar" value={user.nama_lengkap} />
+                            <MyList label="Nama Apotek" value={user.nama_apotek} />
+                            <MyList label="Alamat Apotek" value={user.alamat_apotek} />
+                            <MyList label="Link Google Maps Apotek" value={user.link_maps} />
+                            <MyList label="No SIA" value={user.nomor_sia} />
+                            <MyList label="Nomor SIPA" value={user.nomor_sipa} />
+                            <MyList label="Nomor WhatsApp" value={user.nomor_wa} />
                             <MyList label="Username" value={user.username} />
 
                         </View>
@@ -150,7 +150,7 @@ export default function ({ navigation, route }) {
                 <View style={{
                     padding: 20,
                 }}>
-                    <MyButton warna={colors.primary} title="Edit Profile"  onPress={() => navigation.navigate('AccountEdit', user)} />
+                    <MyButton warna={colors.primary} title="Edit Profile" onPress={() => navigation.navigate('AccountEdit', user)} />
                     <MyGap jarak={10} />
                     <MyButton onPress={btnKeluar} warna={colors.keluar} title="Log Out" Icons="log-out-outline" iconColor={colors.white} colorText={colors.white} />
                 </View>

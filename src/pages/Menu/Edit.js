@@ -2,37 +2,14 @@ import { View, Text, ScrollView, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { MyButton, MyCalendar, MyHeader, MyInput, MyLoading, MyPicker } from '../../components'
 import { showMessage } from 'react-native-flash-message';
-import { Color, colors, fonts } from '../../utils';
+import { colors, fonts } from '../../utils';
 import { apiURL, getData } from '../../utils/localStorage';
 import moment from 'moment';
 import axios from 'axios';
-import { TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
 
-export default function InputSwamedikasi({ navigation, route }) {
+export default function Edit({ navigation, route }) {
     const [visible, setVisible] = useState(false);
-    const [kirim, setKirim] = useState({
-        fid_pengguna: route.params.id_pengguna,
-        nomor_telepon: '',
-        nomor_doc: '',
-        tanggal: new Date(),
-        nama_pasien: '',
-        tanggal_lahir: new Date(),
-        jenis_kelamin: 'Laki-laki',
-        alamat: '',
-        isian: '',
-        nama_pasien_sakit: '',
-        gejala: '',
-        lama_gejala: '',
-        obat_minum: '',
-        obat_lain: '',
-        rekomendasi: '',
-        obat: '',
-        non_obat: '',
-        referensi: '',
-        hasil: '',
-
-    })
+    const [kirim, setKirim] = useState(route.params)
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -88,14 +65,14 @@ export default function InputSwamedikasi({ navigation, route }) {
         };
 
         setLoading(true)
-        axios.post(apiURL + 'insert_laporan', {
+        axios.post(apiURL + 'update_laporan', {
             ...kirim,
             umur: moment().diff(kirim.tanggal_lahir, 'year')
         }).then(res => {
             console.log(res.data);
             setLoading(false)
             if (res.data.status == 200) {
-
+                navigation.goBack();
                 showMessage({
                     type: 'success',
                     icon: 'success',
@@ -111,27 +88,14 @@ export default function InputSwamedikasi({ navigation, route }) {
 
     const [user, setUser] = useState({});
 
-    const [pasien, setPasien] = useState([])
     const __getUser = () => {
         getData('user').then(u => {
             setUser(u)
         })
     }
 
-    const __getPasien = () => {
-        axios.post(apiURL + 'get_pasien', {
-            fid_pengguna: route.params.id_pengguna
-        }).then(res => {
-            console.log(res.data);
-            setPasien(res.data)
-        })
-    }
-
-    const [open, setOpen] = useState(false);
-
     useEffect(() => {
         __getUser();
-        __getPasien();
     }, [])
 
     return (
@@ -140,7 +104,7 @@ export default function InputSwamedikasi({ navigation, route }) {
             backgroundColor: colors.white,
 
         }}>
-            <MyHeader title="Input Swamedikasi" />
+            <MyHeader title="Edit Swamedikasi" />
 
             <ScrollView>
                 <View style={{
@@ -233,57 +197,8 @@ export default function InputSwamedikasi({ navigation, route }) {
                                     label="Nomor Telepon Pasien"
                                     placeholder="Isi Nomor Telepon Pasien"
                                     value={kirim.nomor_telepon}
-                                    onChangeText={(x) => {
-                                        if (x.length > 0) {
-                                            setOpen(true)
-                                        } else {
-                                            setOpen(false);
-                                        }
-                                        setKirim({ ...kirim, 'nomor_telepon': x })
-                                    }}
+                                    onChangeText={(x) => setKirim({ ...kirim, 'nomor_telepon': x })}
                                 />
-                                {open && <View style={{
-                                    padding: 10,
-                                    borderWidth: 1,
-                                    borderRadius: 10,
-                                    marginTop: 10,
-                                    borderColor: Color.blueGray[300]
-                                }}>
-                                    <Text style={{
-                                        ...fonts.caption,
-                                        color: colors.primary,
-                                    }}> Daftar Pasien yang pernah disimpan</Text>
-
-                                    <FlatList data={pasien.filter(i => i.nomor_telepon.toLowerCase().indexOf(kirim.nomor_telepon.toLowerCase()) > -1)} renderItem={({ item, index }) => {
-                                        return (
-                                            <TouchableOpacity onPress={() => {
-                                                setKirim(item);
-                                                setOpen(false);
-                                            }} style={{
-                                                padding: 10,
-                                                marginVertical: 4,
-                                                borderRadius: 10,
-                                                backgroundColor: colors.primary,
-                                                flexDirection: 'row',
-                                                alignItems: 'center'
-                                            }}>
-                                                <View style={{
-                                                    flex: 1,
-                                                }}>
-                                                    <Text style={{
-                                                        ...fonts.subheadline3,
-                                                        color: colors.white
-                                                    }}>{item.nama_pasien}</Text>
-                                                    <Text style={{
-                                                        ...fonts.caption,
-                                                        color: colors.white
-                                                    }}>{item.nomor_telepon}</Text>
-                                                </View>
-                                                <Icon type='ionicon' name='open-outline' color={colors.white} />
-                                            </TouchableOpacity>
-                                        )
-                                    }} />
-                                </View>}
                             </View>
 
                             {/* nomor doc */}

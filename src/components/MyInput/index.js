@@ -34,12 +34,12 @@ export default function MyInput({
 
   const [tutup, setTutup] = useState(true);
   return (
-    <View style={{ }}>
+    <View style={{}}>
       <Text style={{
-        fontFamily:fonts.primary[600],
+        fontFamily: fonts.primary[600],
         color: colors.black,
         marginBottom: 8,
-        marginLeft:10
+        marginLeft: 10
       }}>{label}</Text>
       <View style={{
         height: 40,
@@ -75,7 +75,7 @@ export default function MyInput({
             flex: 1, // Flex untuk mengisi ruang yang ada
             paddingLeft: icon ? 10 : 40,
             paddingRight: rightLabel ? 10 : 0, // Spasi tambahan jika ada rightLabel
-            
+
             height: 50,
             color: Color.blueGray[900],
           }}
@@ -90,14 +90,14 @@ export default function MyInput({
           </Text>
         )}
         {rightIcon && (
-         <View style={{
-   
-          padding:0,
-          paddingRight:12
-         }}>
-         <Icon type="ionicon" name={rightIcon} color={Color.blueGray[300]} size={24} />
-         </View>
-          )}
+          <View style={{
+
+            padding: 0,
+            paddingRight: 12
+          }}>
+            <Icon type="ionicon" name={rightIcon} color={Color.blueGray[300]} size={24} />
+          </View>
+        )}
         {secureTextEntry && (
           <TouchableOpacity onPress={() => setTutup(!tutup)} style={{
             paddingHorizontal: 20,
@@ -105,7 +105,7 @@ export default function MyInput({
             alignItems: 'center',
             height: '100%',
           }}>
-         
+            <Icon type='ionicon' name={tutup ? 'eye' : 'eye-off'} color={Color.blueGray[300]} size={24} />
           </TouchableOpacity>
         )}
       </View>

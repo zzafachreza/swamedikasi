@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import Spinner from 'react-native-spinkit';
-import { Color, colors, fonts } from '../../utils';
+import { Color, colors, fonts, windowWidth } from '../../utils';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -16,6 +16,8 @@ export default function MyLoading({ type = 'Circle', color = colors.white }) {
 
 const styles = StyleSheet.create({
     container: {
+        width: windowWidth,
+        height: windowHeight,
         position: 'absolute',
         top: 0,
         left: 0,
