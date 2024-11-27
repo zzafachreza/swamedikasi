@@ -95,7 +95,7 @@ export default function InputSwamedikasi({ navigation, route }) {
             console.log(res.data);
             setLoading(false)
             if (res.data.status == 200) {
-
+                navigation.goBack();
                 showMessage({
                     type: 'success',
                     icon: 'success',
@@ -122,7 +122,7 @@ export default function InputSwamedikasi({ navigation, route }) {
         axios.post(apiURL + 'get_pasien', {
             fid_pengguna: route.params.id_pengguna
         }).then(res => {
-            console.log(res.data);
+
             setPasien(res.data)
         })
     }
@@ -130,6 +130,13 @@ export default function InputSwamedikasi({ navigation, route }) {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
+        axios.post(apiURL + 'get_last').then(res => {
+            console.log(res.data);
+            setKirim({
+                ...kirim,
+                nomor_doc: res.data
+            })
+        })
         __getUser();
         __getPasien();
     }, [])
@@ -165,51 +172,52 @@ export default function InputSwamedikasi({ navigation, route }) {
                     }}>
 
                         <View style={{
-                            flexDirection: 'row'
+                            flexDirection: 'row',
+
                         }}>
                             <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1 }}>Nama Apotek</Text>
-
-                            <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1.7 }}>: {user.nama_apotek}</Text>
+                            <Text style={{ flex: 0.1 }}>:</Text>
+                            <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1.5 }}> {user.nama_apotek}</Text>
                         </View>
 
                         <View style={{
                             flexDirection: 'row'
                         }}>
                             <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1 }}>Alamat Apotek</Text>
-
-                            <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1.7 }}>: {user.alamat_apotek}</Text>
+                            <Text style={{ flex: 0.1 }}>:</Text>
+                            <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1.5 }}>{user.alamat_apotek}</Text>
                         </View>
 
                         <View style={{
                             flexDirection: 'row'
                         }}>
                             <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1 }}>Nama Apoteker</Text>
-
-                            <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1.7 }}>: {user.nama_lengkap}</Text>
+                            <Text style={{ flex: 0.1 }}>:</Text>
+                            <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1.5 }}>{user.nama_lengkap}</Text>
                         </View>
 
                         <View style={{
                             flexDirection: 'row'
                         }}>
                             <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1 }}>No SIPA</Text>
-
-                            <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1.7 }}>: {user.nomor_sipa}</Text>
+                            <Text style={{ flex: 0.1 }}>:</Text>
+                            <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1.5 }}>{user.nomor_sipa}</Text>
                         </View>
 
                         <View style={{
                             flexDirection: 'row'
                         }}>
                             <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1 }}>Nomor SIA</Text>
-
-                            <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1.7 }}>: {user.nomor_sia}</Text>
+                            <Text style={{ flex: 0.1 }}>:</Text>
+                            <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1.5 }}>{user.nomor_sia}</Text>
                         </View>
 
                         <View style={{
                             flexDirection: 'row'
                         }}>
                             <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1 }}>Telepon Apoteker</Text>
-
-                            <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1.7 }}>: {user.nomor_wa}</Text>
+                            <Text style={{ flex: 0.1 }}>:</Text>
+                            <Text style={{ fontFamily: fonts.primary[600], fontSize: 12, flex: 1.5 }}> {user.nomor_wa}</Text>
                         </View>
 
                     </View>
@@ -239,7 +247,7 @@ export default function InputSwamedikasi({ navigation, route }) {
                                         } else {
                                             setOpen(false);
                                         }
-                                        setKirim({ ...kirim, 'nomor_telepon': x })
+                                        setKirim({ ...kirim, 'nomor_telepon': x, })
                                     }}
                                 />
                                 {open && <View style={{
@@ -257,7 +265,10 @@ export default function InputSwamedikasi({ navigation, route }) {
                                     <FlatList data={pasien.filter(i => i.nomor_telepon.toLowerCase().indexOf(kirim.nomor_telepon.toLowerCase()) > -1)} renderItem={({ item, index }) => {
                                         return (
                                             <TouchableOpacity onPress={() => {
-                                                setKirim(item);
+                                                setKirim({
+                                                    ...item,
+                                                    nomor_doc: kirim.nomor_doc
+                                                });
                                                 setOpen(false);
                                             }} style={{
                                                 padding: 10,
