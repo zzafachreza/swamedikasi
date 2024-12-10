@@ -14,6 +14,11 @@ export default function Edit({ navigation, route }) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const GENDER_OPTIONS = [
+        { value: 'Laki-laki', label: 'Laki-laki' },
+        { value: 'Perempuan', label: 'Perempuan' }
+    ];
+    
     const toggleVisible = () => {
         setVisible(!visible);
     }
@@ -29,6 +34,19 @@ export default function Edit({ navigation, route }) {
     };
 
     const handleInput = () => {
+
+        if (!kirim.jenis_kelamin) {
+            showMessage({
+                type: 'default',
+                color: 'white',
+                backgroundColor: colors.danger,
+                message: 'Jenis Kelamin belum dipilih'
+            });
+            return;
+        }
+
+        
+        console.log("Jenis Kelamin yang dipilih:", kirim.jenis_kelamin); // Cek nilai jenis_kelamin
         const requiredFields = [
             { field: kirim.nomor_telepon, message: "Mohon isi Nomor Telepon Pasien!" },
             { field: kirim.tanggal, message: "Mohon pilih Tanggal Swamedikasi!" },
@@ -50,37 +68,55 @@ export default function Edit({ navigation, route }) {
 
         ];
 
-        for (let i = 0; i < requiredFields.length; i++) {
-            console.log(requiredFields[i].field.length == 0);
-            if (requiredFields[i].field.length === 0) {
-                showMessage({
-                    type: "default",
-                    color: 'white',
-                    backgroundColor: colors.danger,
-                    message: requiredFields[i].message
-                });
-                return;
+        const validateFields = (fields) => {
+            for (let i = 0; i < fields.length; i++) {
+                if (!fields[i].field || fields[i].field === '') {
+                    showMessage({
+                        type: "default",
+                        color: 'white',
+                        backgroundColor: colors.danger,
+                        message: fields[i].message
+                    });
+                    return false;
+                }
             }
-
+            return true;
         };
+    
+        // Pada handleInput
+        if (!validateFields(requiredFields)) return;
+        
+        
+   // Pastikan jenis_kelamin ada dan valid
 
-        setLoading(true)
+
+        setLoading(true);
+        console.log("Jenis Kelamin yang akan dikirim:", kirim.jenis_kelamin); // Cek sebelum pengiriman
         axios.post(apiURL + 'update_laporan', {
             ...kirim,
             umur: moment().diff(kirim.tanggal_lahir, 'year')
-        }).then(res => {
-            console.log(res.data);
-            setLoading(false)
+        })
+        .then(res => {
+            setLoading(false);
             if (res.data.status == 200) {
                 navigation.goBack();
                 showMessage({
                     type: 'success',
                     icon: 'success',
                     message: res.data.message
-                })
+                });
             }
         })
-
+        .catch(err => {
+            setLoading(false);
+            console.error(err);
+            showMessage({
+                type: 'danger',
+                icon: 'danger',
+                message: 'Terjadi kesalahan saat menyimpan data'
+            });
+        });
+        
 
 
     }
@@ -98,6 +134,15 @@ export default function Edit({ navigation, route }) {
         __getUser();
     }, [])
 
+    useEffect(() => {
+        if (user && user.jenis_kelamin) {
+            setKirim(prevState => ({
+                ...prevState,
+                jenis_kelamin: user.jenis_kelamin // Update jenis_kelamin dengan data user jika ada
+            }));
+        }
+    }, [user]);
+    
     return (
         <View style={{
             flex: 1,
@@ -248,13 +293,19 @@ export default function Edit({ navigation, route }) {
                             <View style={{
                                 marginTop: 10
                             }}>
-                                <MyPicker value={kirim.jenis_kelamin} onChangeText={(x) => setKirim({ ...kirim, 'jenis_kelamin': x })} label="Jenis Kelamin" data={
-                                    [
-                                        { 'value': 'Laki-laki', 'label': 'Laki-laki' },
-                                        { 'value': 'Perempuan', 'label': 'Perempuan' }
-                                    ]
-                                } />
-                            </View>
+                       <MyPicker
+    value={kirim.jenis_kelamin || 'Laki-laki'} // Default ke 'Laki-laki' jika tidak ada nilai
+    onValueChange={(value) => {
+        console.log("Jenis Kelamin yang dipilih:", value); // Debug pilihan
+        setKirim({ ...kirim, jenis_kelamin: value });
+    }}
+    label="Jenis Kelamin"
+    data={GENDER_OPTIONS}
+/>
+
+
+
+                          </View>
                             {/* Alamat pasien */}
                             <View style={{
                                 marginTop: 10

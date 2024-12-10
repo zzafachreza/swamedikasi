@@ -222,7 +222,7 @@ export default function Register({ navigation }) {
                             <MyInput
                                 label="Nomor SIA"
                                 placeholder="Nomor SIA"
-                                keyboardType='numeric'
+                               
                                 value={kirim.nomorSIA}
                                 onChangeText={(x) => setKirim({ ...kirim, 'nomorSIA': x })}
                             />
@@ -236,7 +236,7 @@ export default function Register({ navigation }) {
                             <MyInput
                                 label="Nomor SIPA"
                                 placeholder="Nomor SIPA"
-                                keyboardType='numeric'
+                         
                                 value={kirim.nomorSIPA}
                                 onChangeText={(x) => setKirim({ ...kirim, 'nomorSIPA': x })}
                             />

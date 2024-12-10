@@ -130,10 +130,10 @@ export default function AccountEdit({ navigation, route }) {
                     <MyInput
                         label="Nomor SIA"
                         placeholder="Nomor SIA"
-                        keyboardType='numeric'
+                
                         value={kirim.nomor_sia}
                         onChangeText={(x) => setKirim({ ...kirim, 'nomor_sia': x })}
-                    />
+                    /> 
                 </View>
 
 
@@ -144,7 +144,7 @@ export default function AccountEdit({ navigation, route }) {
                     <MyInput
                         label="Nomor SIPA"
                         placeholder="Nomor SIPA"
-                        keyboardType='numeric'
+
                         value={kirim.nomor_sipa}
                         onChangeText={(x) => setKirim({ ...kirim, 'nomor_sipa': x })}
                     />
